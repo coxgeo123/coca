@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RockTube - Videos de Rock</title>
+    <style>
+        :root {
+            --primary: #ff4500;
+            --secondary: #000;
+            --dark: #121212;
+            --light: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--secondary);
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 3px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: "🤘";
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.1;
+            right: 20px;
+            top: 10px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 3em;
+            color: var(--primary);
+            text-shadow: 2px 2px 4px #000;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-style: italic;
+            color: #aaa;
+        }
+
+        nav {
+            background-color: #222;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 20px;
+        }
+
+        nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+
+        nav a:hover {
+            color: #fff;
+            background-color: var(--primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            display: inline-block;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .video-card {
+            background-color: #222;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe,
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 15px;
+        }
+
+        .video-info h3 {
+            margin: 0 0 10px 0;
+            color: var(--primary);
+        }
+
+        .video-info p {
+            margin: 0;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        .category-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .category-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background-color: var(--primary);
+            color: black;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--secondary);
+            color: #aaa;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            border-top: 1px solid var(--primary);
+        }
+
+        .social-links {
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: #aaa;
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav li {
+                margin: 0 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>ROCKTUBE</h1>
+        <p class="tagline">El mejor contenido de rock en un solo lugar</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#youtube">YouTube</a></li>
+            <li><a href="#videos">Videos MP4</a></li>
+            <li><a href="#clasicos">Clásicos</a></li>
+            <li><a href="#nuevos">Nuevos Lanzamientos</a></li>
+            <li><a href="#live">En Vivo</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="youtube">
+            <h2 class="section-title">Videos de YouTube</h2>
+
+            <div class="category-buttons">
+                <button class="category-btn active">Todos</button>
+                <button class="category-btn">Metal</button>
+                <button class="category-btn">Hard Rock</button>
+                <button class="category-btn">Punk</button>
+                <button class="category-btn">Alternativo</button>
+            </div>
+
+            <div class="video-grid">
+                <!-- Video 1 -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/IwZP5cq6Bkk?si=Nb7OLMf2ZjACScv4"
+                            title="Video de rock agregado por usuario" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Tu video de rock favorito</h3>
+                        <p>Agregado por ti | Duración personalizada</p>
+                    </div>
+                </div>
+
+                <!-- Video 2 - El nuevo video que solicitaste -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/88-WerrEKjE?si=nCX3TmEA7y8vo_3c"
+                            title="Nuevo video de rock agregado" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Otro gran video de rock</h3>
+                        <p>Agregado por ti | Segundo video especial</p>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/v2AC41dglnM" title="Thunderstruck - AC/DC"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>AC/DC - Thunderstruck</h3>
+                        <p>Video oficial | 1990 | 4:52 min</p>
+                    </div>
+                </div>
+
+                <!-- Video 4 -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/tAGnKpE4NCI" title="Metallica - Nothing Else Matters"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Metallica - Nothing Else Matters</h3>
+                        <p>Video oficial | 1992 | 6:28 min</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="videos">
+            <h2 class="section-title">Videos MP4</h2>
+
+            <div class="video-grid">
+                <!-- Video MP4 1 -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="https://i.ytimg.com/vi/QkF3oxziUI4/maxresdefault.jpg">
+                            <source src="tu_video1.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Led Zeppelin - Stairway to Heaven</h3>
+                        <p>Concierto en vivo | 1973 | 10:03 min</p>
+                    </div>
+                </div>
+
+                <!-- Video MP4 2 -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="https://i.ytimg.com/vi/lDK9QqIzhwk/maxresdefault.jpg">
+                            <source src="tu_video2.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Black Sabbath - Paranoid</h3>
+                        <p>Concierto en París | 1970 | 2:50 min</p>
+                    </div>
+                </div>
+
+                <!-- Video MP4 3 -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="https://i.ytimg.com/vi/fJ9rUzIMcZQ/maxresdefault.jpg">
+                            <source src="tu_video3.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Queen - Bohemian Rhapsody</h3>
+                        <p>Video oficial | 1975 | 5:55 min</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+            <a href="#" aria-label="YouTube">▶️</a>
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="#" aria-label="Spotify">🎵</a>
+        </div>
+        <p>© 2023 RockTube - Todos los derechos reservados</p>
+        <p>Diseñado para amantes del rock 🤘</p>
+    </footer>
+
+    <script>
+        // Filtrado por categorías
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.category-btn.active').classList.remove('active');
+                btn.classList.add('active');
+                // Aquí iría la lógica para filtrar los videos
+                console.log(`Mostrando categoría: ${btn.textContent}`);
+            });
+        });
+    </script>
+</body>
+
+</html>
